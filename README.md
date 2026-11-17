@@ -1,21 +1,19 @@
-# Launch Tide Quantiles
+# Launch Tide: adaptive audience forecasts
 
-Offline launch-day Twitch audience quantile forecasts using comparable release curves.
+This Node.js program predicts five quantiles for hours 2–24 of a game's launch day, conditioned on the first observed hour and the supplied historical release curves.
 
-## Run
+## Forecast method
 
-Node.js 22.18 or newer. Set MAKEFUN_INPUT_DIR and MAKEFUN_OUTPUT_DIR, then run node main.ts.
+The model compares pre-launch audience ratios, launch audience scale, platform mix, rolling unlocks and early-access metadata. It excludes the target-history record from the training launches. Neighbor count and metadata weight are selected using leave-one-launch-out pinball loss across the historical comparables included in the input. The final prediction retains a small weight on the full historical population.
 
-## Current status
+No practice answer file or future target observation is used. Historical validation is a development diagnostic, not evidence of future accuracy or a prize.
 
-Accepted by the platform. Practice pinball loss: 0.284185. Practice results do not predict final results.
+## Execution
 
-These are experimental competition projects. No prize has been received.
+Use Node.js 22.18 or later. Set MAKEFUN_INPUT_DIR to the directory containing the supplied .in cases and MAKEFUN_OUTPUT_DIR to an empty output directory, then execute `node main.ts`. Each case produces a matching .out JSON file. Runtime uses only Node's standard library and makes no network calls.
 
-## Repository contents
+## Validation and status
 
-Source code, the MIT license, and the competition provenance anchor are included. Wallet private keys, API credentials, raw chat logs, transcript bundles, local output folders and machine-specific settings are excluded. Vendored competition helpers retain their original notices.
+All four supplied case outputs pass structural checks: 23 ordered hours, five finite positive nondecreasing quantiles per hour, and values within the contest cap. Leave-one-launch-out loss on the 37 supplied historical launches is approximately 0.266; an unconditional historical comparison is approximately 0.340. The earlier platform submission had practice loss 0.284185. This adaptive version has not yet received a platform score.
 
-## License
-
-MIT; see LICENSE.
+This is experimental competition software. No reward has been received. The source is MIT licensed; see LICENSE. Private keys, access credentials, transcript archives and generated forecasts do not belong in this repository.

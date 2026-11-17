@@ -1,14 +1,15 @@
-node_modules/
-__pycache__/
-*.pyc
-out/
-output/
-.env
-.env.*
+# Local secrets and authentication material
+.env*
 *.jwk
 *keypair*.json
 *credentials*
+# Generated forecasts, dependencies and caches
+node_modules/
+out/
+output/
+__pycache__/
+*.pyc
+# Competition upload artifacts are kept outside the source repository
 *transcript*
 *.tar.gz
 *.bundle
-.DS_Store
