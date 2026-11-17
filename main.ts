@@ -21,7 +21,7 @@ for(const file of readdirSync(input).filter(f=>f.endsWith('.in')).sort()){
   const pre=[-23,-11,-5,-2,0].map(h=>points.get(h)).filter(v=>v!==undefined) as number[];
   if(pre.length){const ratio=pre.reduce((s,v)=>s+v,0)/pre.length/first;
    const ours=(c.history_hourly??[]).filter((r:any)=>{const h=(Date.parse(r.from)-Date.parse(c.day_start))/3600000;return h>=-24&&h<0}).map((r:any)=>r.viewers);
-   if(ours.length){const target=ours.reduce((s:number,v:number)=>s+v,0)/ours.length/p1;w*=Math.exp(-Math.abs(log(ratio+.02)-log(target+.02))*.25)}
+   if(ours.length){const target=ours.reduce((s:number,v:number)=>s+v,0)/ours.length/p1;w*=Math.exp(-Math.abs(Math.log(ratio+.02)-Math.log(target+.02))*.25)}
   }
   curves.push({points,first,w});
  }
@@ -33,7 +33,7 @@ for(const file of readdirSync(input).filter(f=>f.endsWith('.in')).sort()){
    const shape=weighted([...values],level);const center=weighted([...values],.5);
    const widened=center+(shape-center)*1.1;
    return Math.round(Math.max(1,Math.min(1e9,p1*Math.exp(widened)))*100)/100;
-  });return {hour,q};
+  }).sort((a:number,b:number)=>a-b);return {hour,q};
  });
  writeFileSync(join(output,file.replace(/\.in$/,'.out')),JSON.stringify({hours})+'\n');
 }
