@@ -1,4 +1,4 @@
-# Launch Tide
+# 上线观众量预测 / Launch Tide
 
 [中文](#中文) · [English](#english)
 
