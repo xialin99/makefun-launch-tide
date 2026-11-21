@@ -36,7 +36,7 @@ MAKEFUN_INPUT_DIR=examples MAKEFUN_OUTPUT_DIR=out node main.ts
 
 The output is written to `out/demo.out`. See the Chinese section for the equivalent PowerShell commands.
 
-[补充技术说明 / Additional technical notes](README.details.md)
+[中文技术说明](README.details.zh.md) · [English technical notes](README.details.md)
 
 [make.fun 赛事 / Original bounty](https://make.fun/bounty/gta6-twitch-ccu-forecast-01)
 
