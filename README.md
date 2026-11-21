@@ -1,19 +1,46 @@
-# Launch Tide: adaptive audience forecasts
+# Launch Tide
 
-This Node.js program predicts five quantiles for hours 2–24 of a game's launch day, conditioned on the first observed hour and the supplied historical release curves.
+[中文](#中文) · [English](#english)
 
-## Forecast method
+## 中文
 
-The model compares pre-launch audience ratios, launch audience scale, platform mix, rolling unlocks and early-access metadata. It excludes the target-history record from the training launches. Neighbor count and metadata weight are selected using leave-one-launch-out pinball loss across the historical comparables included in the input. The final prediction retains a small weight on the full historical population.
+用历史游戏发布曲线和首小时观测预测接下来各小时的观众量分位数。
 
-No practice answer file or future target observation is used. Historical validation is a development diagnostic, not evidence of future accuracy or a prize.
+### 本地运行
 
-## Execution
+使用 Node.js 22.18 或更新版本。设置 `MAKEFUN_INPUT_DIR`（存放赛事 `.in` 文件）和 `MAKEFUN_OUTPUT_DIR`，然后运行 `node main.ts`。
 
-Use Node.js 22.18 or later. Set MAKEFUN_INPUT_DIR to the directory containing the supplied .in cases and MAKEFUN_OUTPUT_DIR to an empty output directory, then execute `node main.ts`. Each case produces a matching .out JSON file. Runtime uses only Node's standard library and makes no network calls.
+PowerShell 示例（使用模拟数据）
 
-## Validation and status
+```powershell
+$env:MAKEFUN_INPUT_DIR = "examples"
+$env:MAKEFUN_OUTPUT_DIR = "out"
+node main.ts
+```
 
-All four supplied case outputs pass structural checks: 23 ordered hours, five finite positive nondecreasing quantiles per hour, and values within the contest cap. Leave-one-launch-out loss on the 37 supplied historical launches is approximately 0.266; an unconditional historical comparison is approximately 0.340. The earlier platform submission had practice loss 0.284185. The adaptive submission scored 0.282551 with 94.57% interval coverage. Its transcript matched 68.09% of counted source lines, below the 80% authorship threshold for efficiency ranking. The optimized local version produced identical predictions and training diagnostics on all four practice cases in two runs, reducing model computation from 839–882 ms to 314–318 ms.
+结果写入 `out/demo.out`。
 
-This is experimental competition software. No reward has been received. The source is MIT licensed; see LICENSE. Private keys, access credentials, transcript archives and generated forecasts do not belong in this repository.
+## English
+
+A quantile forecaster for launch-day audiences using historical launch curves and the first observed hour.
+
+### Run locally
+
+Use Node.js 22.18 or newer. Set `MAKEFUN_INPUT_DIR` to the challenge’s `.in` files and `MAKEFUN_OUTPUT_DIR` to a writable directory, then run `node main.ts`.
+
+Run the synthetic example on macOS or Linux.
+
+```sh
+MAKEFUN_INPUT_DIR=examples MAKEFUN_OUTPUT_DIR=out node main.ts
+```
+
+The output is written to `out/demo.out`. See the Chinese section for the equivalent PowerShell commands.
+
+[补充技术说明 / Additional technical notes](README.details.md)
+
+[make.fun 赛事 / Original bounty](https://make.fun/bounty/gta6-twitch-ccu-forecast-01)
+
+## 许可证 / License
+
+MIT. See [LICENSE](LICENSE).
+
