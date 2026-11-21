@@ -4,6 +4,21 @@
 
 ## 中文
 
+### 第一次使用
+
+安装 [Node.js 的 LTS 长期支持版](https://nodejs.org/en/download)（22.18 或更新）。
+
+1. 在仓库页面点 **Code → Download ZIP**，下载并解压。打开解压后含有 `main.ts` 的文件夹。
+2. 在 Windows 文件资源管理器地址栏输入 `powershell` 后按回车。把下面的命令复制到打开的窗口并回车。
+
+```powershell
+$env:MAKEFUN_INPUT_DIR = 'examples'
+$env:MAKEFUN_OUTPUT_DIR = 'out'
+node main.ts
+```
+
+用记事本或任意文本编辑器打开 `out/demo.out`。里面是模拟游戏发布后第 2、3 小时的观众分位数。
+
 用历史游戏发布曲线和首小时观测预测接下来各小时的观众量分位数。
 
 ### 本地运行
@@ -21,6 +36,21 @@ node main.ts
 结果写入 `out/demo.out`。
 
 ## English
+
+### First use
+
+Install the [Node.js LTS release](https://nodejs.org/en/download), version 22.18 or newer.
+
+1. Choose **Code → Download ZIP**, extract it, then open the extracted project folder.
+2. On Windows, type `powershell` in the File Explorer address bar and press Enter. Run the commands below.
+
+```powershell
+$env:MAKEFUN_INPUT_DIR = 'examples'
+$env:MAKEFUN_OUTPUT_DIR = 'out'
+node main.ts
+```
+
+用记事本或任意文本编辑器打开 `out/demo.out`。里面是模拟游戏发布后第 2、3 小时的观众分位数。 macOS or Linux users can use the shell example further down.
 
 A quantile forecaster for launch-day audiences using historical launch curves and the first observed hour.
 
